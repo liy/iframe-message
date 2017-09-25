@@ -19,7 +19,10 @@ export default class Receiver
     let action = this.invokers[e.data.type];
     // do not respond the response... recursively...
     if(action && !e.data.isResponse) {
-      await new Promise(action);
+      await new Promise((resolve, reject) => {
+        action(e.data, resolve, reject);
+      });
+      console.log('done!!')
       // Note that I created a new data. Because if message is passed
       // in the same window, the event is a reference of the original event.
       // Original event should not be modified. 

@@ -1,7 +1,7 @@
 export default class Sender
 {
   constructor(target=window.parent, origin='*') {
-    this.target = target;
+    this.target = target || window;
     this.origin = origin;
     this.resolvers = Object.create(null);
 
